@@ -6,7 +6,7 @@
     --card-bg: #FFFFFF;
     --accent: #8E7C70;
     --accent-hover: #76655A;
-    --shadow: rgba(0, 0, 0, 0.04);
+    --shadow: rgba(0, 0, 0, 0.08);
 }
 
 .dark-theme {
@@ -16,7 +16,7 @@
     --card-bg: #2A2A2A;
     --accent: #D2C2B4;
     --accent-hover: #E2D4C9;
-    --shadow: rgba(0, 0, 0, 0.2);
+    --shadow: rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -33,6 +33,37 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%; /* Запобігає авто-масштабуванню тексту на iOS */
+}
+
+/* Фіксовані кнопки теми та музики (залишаються на екрані при скролі) */
+.floating-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    box-shadow: 0 4px 12px var(--shadow);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease, background-color 0.3s, color 0.3s;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
 }
 
 .container {
@@ -104,7 +135,6 @@ h2::after {
     border-right: 170px solid transparent;
     border-top: 110px solid #D9CBC0;
     transform-origin: top;
-    /* Змінено: збільшено час до 0.8s, прибрано затримку (0s) */
     transition: transform 0.8s 0s ease; 
     z-index: 4;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
@@ -149,7 +179,7 @@ h2::after {
 }
 
 .envelope-front-title h2::after {
-    content: ""; /* Видаляємо сердечко-значок після заголовка у конверті */
+    content: "";
     display: none;
 }
 
@@ -191,7 +221,6 @@ h2::after {
     background: #FFFFFF;
     border-radius: 4px;
     z-index: 2;
-    /* Змінено: анімація триває 0.8s і починається із затримкою 0.8s (після відкриття клапана) */
     transition: transform 0.8s 0.8s ease;
     padding: 15px;
     box-sizing: border-box;
@@ -352,35 +381,6 @@ section { padding: 60px 0; }
     background: var(--card-bg); padding: 20px; border-radius: 4px; box-shadow: 0 4px 15px var(--shadow);
 }
 
-/* Галерея */
-.gallery-grid {
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); /* 2 колонки на мобільних телефонах виглядають значно краще, ніж 1 */
-    gap: 12px; 
-    margin-top: 30px;
-}
-
-@media (min-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-.gallery-item img {
-    width: 100%; 
-    height: 180px; 
-    object-fit: cover; 
-    border-radius: 4px;
-    transition: transform 0.4s;
-}
-
-@media (min-width: 768px) {
-    .gallery-item img { height: 250px; }
-}
-
-.gallery-item img:hover { transform: scale(1.03); }
-
-
 /* Форма RSVP */
 .rsvp-form {
     background: var(--card-bg); padding: 25px 20px; max-width: 550px; margin: 30px auto 0;
@@ -434,6 +434,7 @@ section { padding: 60px 0; }
 
 /* Адаптивність */
 @media (max-width: 768px) {
+    .floating-controls { top: 15px; right: 15px; }
     .timeline::after { left: 20px; }
     .timeline-item { width: 100%; padding-left: 45px; padding-right: 0; margin-bottom: 20px; }
     .timeline-item.left { text-align: left; }
