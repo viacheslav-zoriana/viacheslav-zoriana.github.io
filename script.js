@@ -17,7 +17,7 @@ function openInvitation() {
 }
 
 // 2. Таймер зворотного відліку
-const weddingDate = new Date(2026, 7, 23, 15, 0, 0).getTime(); // 23 серпня 2026
+const weddingDate = new Date(2026, 7, 23, 14, 0, 0).getTime(); // 23 серпня 2026
 
 setInterval(function() {
     const now = new Date().getTime();
